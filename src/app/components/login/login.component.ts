@@ -16,13 +16,11 @@ export class LoginComponent implements OnInit {
   }
 
   setEmail(email) {
-      console.log(email);
       this.email = email;
   }
 
   setPassword(password) {
       //totally secure ;)
-      console.log(password);
       this.password = password;
   }
 
