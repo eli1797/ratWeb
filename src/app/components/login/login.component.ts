@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +15,8 @@ export class LoginComponent implements OnInit {
   email:string;
   password:string;
 
-  constructor(public afAuth: AngularFireAuth) {
-  }
+  constructor(public auth: AuthService,
+              private router: Router) { }
 
   setEmail(email) {
       this.email = email;
@@ -21,13 +24,22 @@ export class LoginComponent implements OnInit {
 
   setPassword(password) {
       //totally secure ;)
-      this.password = password;
+      if (this.password !== null || this.password !== "") {
+        this.password = password;
+      } else {
+        alert("Password cannot be null or empty");
+      }
   }
 
   login() {
-      if (this.email != null || this.email != "") {
-          if (this.password != null || this.password != "") {
-            this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password);
+    /*
+    NOT sure if alert boxes work
+    @TODO
+    */
+      if (this.email !== null || this.email !== "") {
+          if (this.password !== null || this.password !== "") {
+            console.log("login attempt");
+            this.auth.emailLogin(this.email, this.password);
           } else {
               alert("Password cannot be null or empty. Try again please");
           }
@@ -37,7 +49,7 @@ export class LoginComponent implements OnInit {
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    this.auth.signOut();
   }
 
   ngOnInit() {

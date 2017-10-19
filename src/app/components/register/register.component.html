@@ -1,3 +1,19 @@
-<p>
-  register works!
-</p>
+<br>
+<div *ngIf="authS.authenticated; else notRegistered">
+      <h1>Hello {{email}}! You've already registered and been logged-in!</h1>
+      <button (click)="authS.signOut()">Logout</button>
+    </div>
+    <ng-template #notRegistered>
+        <div>
+            <label for="email">Email:</label>
+            <input (mouseleave)="setEmail(email.value)" type="text" #email>
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input (mouseleave)="setPassword(password.value)" type="text" #password>
+        </div>
+
+        <p>Please enter valid email and password then register</p>
+    
+        <button (click)="register()">Register</button>
+    </ng-template>

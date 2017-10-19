@@ -1,0 +1,18 @@
+<br><br>
+<h1>{{ title }}</h1>
+
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+</agm-map>
+
+<br> 
+<br>
+
+<h1>Firebase Info!</h1>
+<p> Attempt to pull data from firebase realtime database (shared with android app). </p>
+
+<hr>
+
+<app-sightings-list></app-sightings-list>
